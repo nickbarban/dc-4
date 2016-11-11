@@ -2,13 +2,31 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+    'ngMessages',
+    'ngSanitize',
+    'ngMaterial',
+    'ui.router',
+    'ngDragDrop',
+    'ui.calendar',
+    'ui.bootstrap',
+    'myApp.scheduler',
+    'myApp.version'
+]).config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+    $urlRouterProvider.otherwise('/home');
+
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'view1/view1.html'
+        })
+        .state('scheduler', {
+            url: '/scheduler',
+            templateUrl: 'view3/view3.html',
+            controller: 'CalendarCtrl'
+        })
+        .state('about', {
+            url: '/about',
+            templateUrl: 'view2/view2.html'
+        });
 }]);
